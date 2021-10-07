@@ -216,7 +216,8 @@ def get_org_repos_from_name(key, org_name):
         defaultBranchRef {
           name
         },
-        name
+        name,
+        isArchived
       }
     }
   }
@@ -232,9 +233,10 @@ def get_org_repos_from_name(key, org_name):
                 # This is likely an empty repository, so just skip it
                 continue
 
-            repo_default_branch = repo['defaultBranchRef']['name']
+            if repo['isArchived']:
+                continue
 
-            repos[repo_name] = repo_default_branch
+            repos[repo_name] = repo['defaultBranchRef']['name']
 
         if not result['data']['organization']['repositories']['pageInfo']['hasNextPage']:
             break
