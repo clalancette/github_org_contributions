@@ -274,15 +274,15 @@ def print_csv(authors, print_totals):
     sorted_authors = {key: value for key, value in sorted(authors.items(), key=lambda item: item[1].commits_in_last_year + item[1].reviews_in_last_year, reverse=True)}
 
     if print_totals:
-        print('Author,Commits in last year,Total commits,Reviews in last year,Total reviews')
+        print('Author,Commits in last year,Total commits,Reviews in last year,Total reviews,Commits+Reviews in last year,Commits+Reviews total')
         for author,counts in sorted_authors.items():
-            print('%s,%d,%d,%d,%d' % (author, counts.commits_in_last_year, counts.total_commits, counts.reviews_in_last_year, counts.total_reviews))
+            print('%s,%d,%d,%d,%d' % (author, counts.commits_in_last_year, counts.total_commits, counts.reviews_in_last_year, counts.total_reviews, counts.commits_in_last_year + counts.reviews_in_last_year, counts.total_commits + counts.total_reviews))
     else:
-        print('Author,Commits in last year,Reviews in last year')
+        print('Author,Commits in last year,Reviews in last year,Commits+Reviews')
         for author,counts in sorted_authors.items():
             if counts.commits_in_last_year == 0 and counts.reviews_in_last_year == 0:
                 continue
-            print('%s,%d,%d' % (author, counts.commits_in_last_year, counts.reviews_in_last_year))
+            print('%s,%d,%d,%d' % (author, counts.commits_in_last_year, counts.reviews_in_last_year, counts.commits_in_last_year + counts.reviews_in_last_year))
     print()
 
 def main():
